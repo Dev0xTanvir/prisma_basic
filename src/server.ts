@@ -6,13 +6,13 @@ import config from "./config";
 async function main() {
   const PORT = config.port;
   try {
-    // await prisma.$connect()
+     await prisma.$connect()
     app.listen(PORT, () => {
       console.log(`server running on ${PORT}`);
     });
   } catch (error) {
     console.error("server starting error", error);
-    // await prisma.$disconnect();
+    await prisma.$disconnect();
     process.exit(1);
   }
 }
