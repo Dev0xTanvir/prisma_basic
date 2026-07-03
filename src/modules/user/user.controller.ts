@@ -29,19 +29,7 @@ const rigesteruser = catchAsync(
 const getmeuser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     
-    const { accesstoken } = req.cookies;
-    console.log(accesstoken);
-
-    const verifytoken = jwtutils.verifytoken(
-      accesstoken,
-      config.jwt_access_secret,
-    );
-
-    if (typeof verifytoken === "string") {
-      throw new Error(verifytoken);
-    }
-
-    const profile = await userservice.getmeuserintodb(verifytoken.id);
+    const profile = await userservice.getmeuserintodb(req.user?.id as string);
 
     sendResponce(res, {
       success: true,

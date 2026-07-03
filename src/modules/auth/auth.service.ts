@@ -8,10 +8,9 @@ import { jwtutils } from "../utils/jwt";
 // login
 
 const loginuser = async (payload: Ilogin) => {
-
   const { email, password } = payload;
 
-    // findunique field
+  // findunique field
 
   const user = await prisma.user.findUniqueOrThrow({
     where: {
@@ -19,7 +18,7 @@ const loginuser = async (payload: Ilogin) => {
     },
   });
 
-    //  compare password
+  //  compare password
 
   const ismatchpassword = await bcrypt.compare(password, user.password);
 
@@ -33,6 +32,7 @@ const loginuser = async (payload: Ilogin) => {
     id: user.id,
     name: user.name,
     email: user.email,
+    role: user.role,
   };
 
   // ! genarated access-token
@@ -60,7 +60,6 @@ const loginuser = async (payload: Ilogin) => {
   );
 
   return { accesstoken, refreshtoken };
-  
 };
 
 export const authservice = {
