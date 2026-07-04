@@ -3,9 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { userservice } from "./user.service";
 import { catchAsync } from "../utils/catchAsync";
 import { sendResponce } from "../utils/sendResponce";
-import config from "../../config";
-import jwt from "jsonwebtoken";
-import { jwtutils } from "../utils/jwt";
+
 
 // user regester
 
@@ -24,11 +22,10 @@ const rigesteruser = catchAsync(
   },
 );
 
-// getme
+// getme user
 
 const getmeuser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    
     const profile = await userservice.getmeuserintodb(req.user?.id as string);
 
     sendResponce(res, {
@@ -40,7 +37,27 @@ const getmeuser = catchAsync(
   },
 );
 
+// update user
+
+const updateuser = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user?.id as string;
+
+    const payload = req.body;
+
+    const updateduser = await userservice.updateuserintodb(userId, payload);
+
+    sendResponce(res, {
+      success: true,
+      statuscode: httpstatus.OK,
+      massege: "update profile sucesfull",
+      data: { updateduser },
+    });
+  },
+);
+
 export const usercontroller = {
   rigesteruser,
   getmeuser,
+  updateuser,
 };

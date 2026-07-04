@@ -65,7 +65,6 @@ const rigesteruserintodb = async (payload: rigesteruserpayload) => {
 // getme
 
 const getmeuserintodb = async (userId: string) => {
-  
   const user = await prisma.user.findUniqueOrThrow({
     where: { id: userId },
     omit: {
@@ -76,11 +75,40 @@ const getmeuserintodb = async (userId: string) => {
     },
   });
 
-  return user
+  return user;
+};
 
+// update
+
+const updateuserintodb = async (userId: string, payload: any) => {
+  
+  const { name, email, bio, profilePhoto } = payload;
+
+  const updateuser = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      name,
+      email,
+      profile: {
+        update: {
+          profilePhoto,
+          bio,
+        },
+      },
+    },
+    omit: {
+      password: true,
+    },
+    include: {
+      profile: true,
+    },
+  });
+
+  return updateuser;
 };
 
 export const userservice = {
   rigesteruserintodb,
   getmeuserintodb,
+  updateuserintodb,
 };

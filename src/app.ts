@@ -4,6 +4,8 @@ import cors from "cors";
 import config from "./config";
 import { userroute } from "./modules/user/user.route";
 import { authroute } from "./modules/auth/auth.route";
+import { postroute } from "./modules/post/post.route";
+import { commentroute } from "./modules/comments/comment.route";
 
 const app: Application = express();
 
@@ -20,5 +22,7 @@ app.use(cookieParser());
 
 app.use("/api/users", userroute);
 app.use("/api/auth", authroute);
+app.use("/api/post", postroute);
+app.use("/api/comment", commentroute);
 
 export default app;

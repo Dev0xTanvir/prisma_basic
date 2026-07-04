@@ -41,6 +41,34 @@ const loginuser = catchAsync(
   },
 );
 
+// refreshtoken
+
+const refreshtoken = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    
+    const refreshtoken = req.cookies.refreshtoken;
+
+    const { accesstoken } = await authservice.refreshtoken(refreshtoken);
+
+    // accesstoken setup
+
+    res.cookie("accesstoken", accesstoken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+    });
+
+    sendResponce(res, {
+      success: true,
+      statuscode: httpstatus.OK,
+      massege: "token refresh sucesfull",
+      data: { accesstoken },
+    });
+  },
+);
+
 export const authcontroller = {
   loginuser,
+  refreshtoken,
 };
