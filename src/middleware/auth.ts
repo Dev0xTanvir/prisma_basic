@@ -32,13 +32,12 @@ export const auth = (...requiredRole: [ROLE]) => {
     }
 
     const verifyedtoken = jwtutils.verifytoken(token, config.jwt_access_secret);
-
     if (!verifyedtoken.success) {
       throw new Error(verifyedtoken.error);
     }
 
     const { email, name, id, role } = verifyedtoken.data as JwtPayload;
-
+    
     if (requiredRole.length && !requiredRole.includes(role)) {
       throw new Error("user frobiden, you do not access permision");
     }

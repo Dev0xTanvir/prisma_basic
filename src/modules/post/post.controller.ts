@@ -40,7 +40,17 @@ const getallpost = catchAsync(
 // getpost status
 
 const getpoststatus = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    
+    const result = await postservice.getallpoststatus();
+
+    sendResponce(res, {
+      success: true,
+      statuscode: httpstatus.OK,
+      massege: "post create sucesfull",
+      data: result,
+    });
+  },
 );
 
 // getmy post
@@ -109,7 +119,24 @@ const updatepost = catchAsync(
 // delete post
 
 const deletepost = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    const postId = req.params?.postId;
+    const authorId = req.user?.id;
+    const isAdmin = req.user?.role === "ADMIN";
+
+    await postservice.deletepoststatus(
+      postId as string,
+      authorId as string,
+      isAdmin,
+    );
+
+    sendResponce(res, {
+      success: true,
+      statuscode: httpstatus.OK,
+      massege: "post update sucesfull",
+      data: null,
+    });
+  },
 );
 
 export const postcontroller = {
