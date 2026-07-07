@@ -7,6 +7,7 @@ import { sendResponce } from "../utils/sendResponce";
 // create post
 const createpost = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
+    
     const id = req.user?.id;
 
     const payload = req.body;

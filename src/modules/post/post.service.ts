@@ -35,7 +35,9 @@ const getallpost = async () => {
 // getpost status
 
 const getallpoststatus = async () => {
+
   const transactionpost = await prisma.$transaction(async (tx) => {
+    
     // const totalpublickpost = await tx.post.count({
     //   where: {
     //     status: Poststatus.PUBLISHED,
