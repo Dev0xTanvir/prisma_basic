@@ -1,6 +1,7 @@
 import { Commentstatus, Poststatus } from "../../../generated/prisma/enums";
+import { PostWhereInput } from "../../../generated/prisma/models";
 import { prisma } from "../../lib/prisma";
-import { Ipostpayload, Iupdatepost } from "./post.interfase";
+import { Ipostpayload, Ipostquery, Iupdatepost } from "./post.interfase";
 
 // create post
 
@@ -17,8 +18,64 @@ const createpost = async (payload: Ipostpayload, userId: string) => {
 
 // getall post
 
-const getallpost = async () => {
+const getallpost = async (query: Ipostquery) => {
+  const page = query.page ? Number(query.page) : 10;
+  const limit = query.limit ? Number(query.limit) : 1;
+  const skip = (page - 1) * limit;
+  const sortby = query.sortby ? query.sortby : "createdAt";
+  const sortOrder = query.sortOrder ? query.sortOrder : "desc";
+
   const post = await prisma.post.findMany({
+    where: {
+      AND: [
+        // searching
+
+        query.searchItem
+          ? {
+              OR: [
+                {
+                  title: {
+                    contains: query.searchItem,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  content: {
+                    contains: query.searchItem,
+                    mode: "insensitive",
+                  },
+                },
+              ],
+            }
+          : {},
+
+        // filtaring
+
+        query.title
+          ? {
+              title: query.title,
+            }
+          : {},
+
+        query.content
+          ? {
+              content: query.content,
+            }
+          : {},
+      ],
+    },
+
+    // pagination
+
+    take: limit,
+    skip: skip,
+
+    // sort
+
+    orderBy: {
+      [sortby]: sortOrder,
+    },
+
     include: {
       author: {
         omit: {
@@ -35,9 +92,7 @@ const getallpost = async () => {
 // getpost status
 
 const getallpoststatus = async () => {
-
   const transactionpost = await prisma.$transaction(async (tx) => {
-    
     // const totalpublickpost = await tx.post.count({
     //   where: {
     //     status: Poststatus.PUBLISHED,

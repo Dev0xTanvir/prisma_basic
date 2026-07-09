@@ -6,6 +6,7 @@ import { userroute } from "./modules/user/user.route";
 import { authroute } from "./modules/auth/auth.route";
 import { postroute } from "./modules/post/post.route";
 import { commentroute } from "./modules/comments/comment.route";
+import { notfound } from "./middleware/notfound";
 
 const app: Application = express();
 
@@ -24,5 +25,7 @@ app.use("/api/users", userroute);
 app.use("/api/auth", authroute);
 app.use("/api/post", postroute);
 app.use("/api/comment", commentroute);
+
+app.use(notfound)
 
 export default app;
