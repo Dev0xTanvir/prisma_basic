@@ -6,12 +6,7 @@ export const catchAsync = (fn: RequestHandler) => {
     try {
       await fn(req, res, next);
     } catch (error) {
-      console.error(error);
-      res.status(httpstatus.INTERNAL_SERVER_ERROR).json({
-        massege: "regestation failed",
-        success: false,
-        Statuscode: httpstatus.INTERNAL_SERVER_ERROR,
-      });
+      next(error);
     }
   };
 };
