@@ -41,3 +41,11 @@ export const Commentstatus = {
 } as const
 
 export type Commentstatus = (typeof Commentstatus)[keyof typeof Commentstatus]
+
+
+export const Subscriptionstatus = {
+  ACTIVE: 'ACTIVE',
+  CENCELED: 'CENCELED'
+} as const
+
+export type Subscriptionstatus = (typeof Subscriptionstatus)[keyof typeof Subscriptionstatus]

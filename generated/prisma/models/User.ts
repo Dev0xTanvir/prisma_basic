@@ -207,6 +207,7 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"User"> | Date | string
   profile?: Prisma.XOR<Prisma.ProfileNullableScalarRelationFilter, Prisma.ProfileWhereInput> | null
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   posts?: Prisma.PostListRelationFilter
   comments?: Prisma.CommentListRelationFilter
 }
@@ -221,6 +222,7 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updateAt?: Prisma.SortOrder
   profile?: Prisma.ProfileOrderByWithRelationInput
+  subscription?: Prisma.SubscriptionOrderByWithRelationInput
   posts?: Prisma.PostOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
 }
@@ -238,6 +240,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updateAt?: Prisma.DateTimeFilter<"User"> | Date | string
   profile?: Prisma.XOR<Prisma.ProfileNullableScalarRelationFilter, Prisma.ProfileWhereInput> | null
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   posts?: Prisma.PostListRelationFilter
   comments?: Prisma.CommentListRelationFilter
 }, "id" | "email">
@@ -280,6 +283,7 @@ export type UserCreateInput = {
   createdAt?: Date | string
   updateAt?: Date | string
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
 }
@@ -294,6 +298,7 @@ export type UserUncheckedCreateInput = {
   createdAt?: Date | string
   updateAt?: Date | string
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
 }
@@ -308,6 +313,7 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
 }
@@ -322,6 +328,7 @@ export type UserUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
 }
@@ -439,6 +446,20 @@ export type UserUpdateOneRequiredWithoutProfileNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProfileInput, Prisma.UserUpdateWithoutProfileInput>, Prisma.UserUncheckedUpdateWithoutProfileInput>
 }
 
+export type UserCreateNestedOneWithoutSubscriptionInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscriptionInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSubscriptionNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscriptionInput
+  upsert?: Prisma.UserUpsertWithoutSubscriptionInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubscriptionInput, Prisma.UserUpdateWithoutSubscriptionInput>, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
+}
+
 export type EnumActiveStatusFieldUpdateOperationsInput = {
   set?: $Enums.ActiveStatus
 }
@@ -457,6 +478,7 @@ export type UserCreateWithoutCommentsInput = {
   createdAt?: Date | string
   updateAt?: Date | string
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
 }
 
@@ -470,6 +492,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   createdAt?: Date | string
   updateAt?: Date | string
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
 }
 
@@ -499,6 +522,7 @@ export type UserUpdateWithoutCommentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
 }
 
@@ -512,6 +536,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
@@ -525,6 +550,7 @@ export type UserCreateWithoutPostsInput = {
   createdAt?: Date | string
   updateAt?: Date | string
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
 }
 
@@ -538,6 +564,7 @@ export type UserUncheckedCreateWithoutPostsInput = {
   createdAt?: Date | string
   updateAt?: Date | string
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
 }
 
@@ -567,6 +594,7 @@ export type UserUpdateWithoutPostsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
 }
 
@@ -580,6 +608,7 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
@@ -592,6 +621,7 @@ export type UserCreateWithoutProfileInput = {
   role?: $Enums.ROLE
   createdAt?: Date | string
   updateAt?: Date | string
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
 }
@@ -605,6 +635,7 @@ export type UserUncheckedCreateWithoutProfileInput = {
   role?: $Enums.ROLE
   createdAt?: Date | string
   updateAt?: Date | string
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
 }
@@ -634,6 +665,7 @@ export type UserUpdateWithoutProfileInput = {
   role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
 }
@@ -647,6 +679,79 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserCreateWithoutSubscriptionInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  activestatus?: $Enums.ActiveStatus
+  role?: $Enums.ROLE
+  createdAt?: Date | string
+  updateAt?: Date | string
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+}
+
+export type UserUncheckedCreateWithoutSubscriptionInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  activestatus?: $Enums.ActiveStatus
+  role?: $Enums.ROLE
+  createdAt?: Date | string
+  updateAt?: Date | string
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+}
+
+export type UserCreateOrConnectWithoutSubscriptionInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
+}
+
+export type UserUpsertWithoutSubscriptionInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSubscriptionInput, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSubscriptionInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSubscriptionInput, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
+}
+
+export type UserUpdateWithoutSubscriptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  activestatus?: Prisma.EnumActiveStatusFieldUpdateOperationsInput | $Enums.ActiveStatus
+  role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSubscriptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  activestatus?: Prisma.EnumActiveStatusFieldUpdateOperationsInput | $Enums.ActiveStatus
+  role?: Prisma.EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updateAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
 }
@@ -701,6 +806,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   updateAt?: boolean
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
+  subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -742,6 +848,7 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "activestatus" | "role" | "createdAt" | "updateAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
+  subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -753,6 +860,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     profile: Prisma.$ProfilePayload<ExtArgs> | null
+    subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
     posts: Prisma.$PostPayload<ExtArgs>[]
     comments: Prisma.$CommentPayload<ExtArgs>[]
   }
@@ -1160,6 +1268,7 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   profile<T extends Prisma.User$profileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$profileArgs<ExtArgs>>): Prisma.Prisma__ProfileClient<runtime.Types.Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  subscription<T extends Prisma.User$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   posts<T extends Prisma.User$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1608,6 +1717,25 @@ export type User$profileArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.ProfileInclude<ExtArgs> | null
   where?: Prisma.ProfileWhereInput
+}
+
+/**
+ * User.subscription
+ */
+export type User$subscriptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subscription
+   */
+  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subscription
+   */
+  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionWhereInput
 }
 
 /**
