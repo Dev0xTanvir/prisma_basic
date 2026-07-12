@@ -44,6 +44,7 @@ export type PostMinAggregateOutputType = {
   views: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  isPremium: boolean | null
   authorId: string | null
 }
 
@@ -57,6 +58,7 @@ export type PostMaxAggregateOutputType = {
   views: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  isPremium: boolean | null
   authorId: string | null
 }
 
@@ -71,6 +73,7 @@ export type PostCountAggregateOutputType = {
   views: number
   createdAt: number
   updatedAt: number
+  isPremium: number
   authorId: number
   _all: number
 }
@@ -94,6 +97,7 @@ export type PostMinAggregateInputType = {
   views?: true
   createdAt?: true
   updatedAt?: true
+  isPremium?: true
   authorId?: true
 }
 
@@ -107,6 +111,7 @@ export type PostMaxAggregateInputType = {
   views?: true
   createdAt?: true
   updatedAt?: true
+  isPremium?: true
   authorId?: true
 }
 
@@ -121,6 +126,7 @@ export type PostCountAggregateInputType = {
   views?: true
   createdAt?: true
   updatedAt?: true
+  isPremium?: true
   authorId?: true
   _all?: true
 }
@@ -222,6 +228,7 @@ export type PostGroupByOutputType = {
   views: number
   createdAt: Date
   updatedAt: Date
+  isPremium: boolean
   authorId: string
   _count: PostCountAggregateOutputType | null
   _avg: PostAvgAggregateOutputType | null
@@ -259,6 +266,7 @@ export type PostWhereInput = {
   views?: Prisma.IntFilter<"Post"> | number
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Post"> | Date | string
+  isPremium?: Prisma.BoolFilter<"Post"> | boolean
   authorId?: Prisma.StringFilter<"Post"> | string
   author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   comments?: Prisma.CommentListRelationFilter
@@ -275,6 +283,7 @@ export type PostOrderByWithRelationInput = {
   views?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   author?: Prisma.UserOrderByWithRelationInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
@@ -294,6 +303,7 @@ export type PostWhereUniqueInput = Prisma.AtLeast<{
   views?: Prisma.IntFilter<"Post"> | number
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Post"> | Date | string
+  isPremium?: Prisma.BoolFilter<"Post"> | boolean
   authorId?: Prisma.StringFilter<"Post"> | string
   author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   comments?: Prisma.CommentListRelationFilter
@@ -310,6 +320,7 @@ export type PostOrderByWithAggregationInput = {
   views?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   _count?: Prisma.PostCountOrderByAggregateInput
   _avg?: Prisma.PostAvgOrderByAggregateInput
@@ -332,6 +343,7 @@ export type PostScalarWhereWithAggregatesInput = {
   views?: Prisma.IntWithAggregatesFilter<"Post"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Post"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Post"> | Date | string
+  isPremium?: Prisma.BoolWithAggregatesFilter<"Post"> | boolean
   authorId?: Prisma.StringWithAggregatesFilter<"Post"> | string
 }
 
@@ -346,6 +358,7 @@ export type PostCreateInput = {
   views?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  isPremium?: boolean
   author: Prisma.UserCreateNestedOneWithoutPostsInput
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
 }
@@ -361,6 +374,7 @@ export type PostUncheckedCreateInput = {
   views?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  isPremium?: boolean
   authorId: string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
 }
@@ -376,6 +390,7 @@ export type PostUpdateInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
 }
@@ -391,6 +406,7 @@ export type PostUncheckedUpdateInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
 }
@@ -406,6 +422,7 @@ export type PostCreateManyInput = {
   views?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  isPremium?: boolean
   authorId: string
 }
 
@@ -420,6 +437,7 @@ export type PostUpdateManyMutationInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type PostUncheckedUpdateManyInput = {
@@ -433,6 +451,7 @@ export type PostUncheckedUpdateManyInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -460,6 +479,7 @@ export type PostCountOrderByAggregateInput = {
   views?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
 }
 
@@ -477,6 +497,7 @@ export type PostMaxOrderByAggregateInput = {
   views?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
 }
 
@@ -490,6 +511,7 @@ export type PostMinOrderByAggregateInput = {
   views?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
 }
 
@@ -603,6 +625,7 @@ export type PostCreateWithoutCommentsInput = {
   views?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  isPremium?: boolean
   author: Prisma.UserCreateNestedOneWithoutPostsInput
 }
 
@@ -617,6 +640,7 @@ export type PostUncheckedCreateWithoutCommentsInput = {
   views?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  isPremium?: boolean
   authorId: string
 }
 
@@ -647,6 +671,7 @@ export type PostUpdateWithoutCommentsInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
 }
 
@@ -661,6 +686,7 @@ export type PostUncheckedUpdateWithoutCommentsInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -675,6 +701,7 @@ export type PostCreateWithoutAuthorInput = {
   views?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  isPremium?: boolean
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
 }
 
@@ -689,6 +716,7 @@ export type PostUncheckedCreateWithoutAuthorInput = {
   views?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  isPremium?: boolean
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
 }
 
@@ -732,6 +760,7 @@ export type PostScalarWhereInput = {
   views?: Prisma.IntFilter<"Post"> | number
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Post"> | Date | string
+  isPremium?: Prisma.BoolFilter<"Post"> | boolean
   authorId?: Prisma.StringFilter<"Post"> | string
 }
 
@@ -746,6 +775,7 @@ export type PostCreateManyAuthorInput = {
   views?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  isPremium?: boolean
 }
 
 export type PostUpdateWithoutAuthorInput = {
@@ -759,6 +789,7 @@ export type PostUpdateWithoutAuthorInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
 }
 
@@ -773,6 +804,7 @@ export type PostUncheckedUpdateWithoutAuthorInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
 }
 
@@ -787,6 +819,7 @@ export type PostUncheckedUpdateManyWithoutAuthorInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -831,6 +864,7 @@ export type PostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   views?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  isPremium?: boolean
   authorId?: boolean
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   comments?: boolean | Prisma.Post$commentsArgs<ExtArgs>
@@ -848,6 +882,7 @@ export type PostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   views?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  isPremium?: boolean
   authorId?: boolean
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["post"]>
@@ -863,6 +898,7 @@ export type PostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   views?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  isPremium?: boolean
   authorId?: boolean
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["post"]>
@@ -878,10 +914,11 @@ export type PostSelectScalar = {
   views?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  isPremium?: boolean
   authorId?: boolean
 }
 
-export type PostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "thumbnail" | "isFeatured" | "status" | "tags" | "views" | "createdAt" | "updatedAt" | "authorId", ExtArgs["result"]["post"]>
+export type PostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "thumbnail" | "isFeatured" | "status" | "tags" | "views" | "createdAt" | "updatedAt" | "isPremium" | "authorId", ExtArgs["result"]["post"]>
 export type PostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   comments?: boolean | Prisma.Post$commentsArgs<ExtArgs>
@@ -911,6 +948,7 @@ export type $PostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     views: number
     createdAt: Date
     updatedAt: Date
+    isPremium: boolean
     authorId: string
   }, ExtArgs["result"]["post"]>
   composites: {}
@@ -1347,6 +1385,7 @@ export interface PostFieldRefs {
   readonly views: Prisma.FieldRef<"Post", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Post", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Post", 'DateTime'>
+  readonly isPremium: Prisma.FieldRef<"Post", 'Boolean'>
   readonly authorId: Prisma.FieldRef<"Post", 'String'>
 }
     

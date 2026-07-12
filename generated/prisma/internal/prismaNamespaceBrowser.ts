@@ -98,6 +98,7 @@ export const PostScalarFieldEnum = {
   views: 'views',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  isPremium: 'isPremium',
   authorId: 'authorId'
 } as const
 
@@ -120,6 +121,7 @@ export const SubscriptionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   status: 'status',
+  stripecustomerid: 'stripecustomerid',
   currentPeriod: 'currentPeriod',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
