@@ -15,7 +15,7 @@ const createsubscription = catchAsync(
     
     sendResponce(res, {
       success: true,
-      statuscode: httpstatus.OK,
+      statuscode: httpstatus.CREATED,
       massege: "subscription create sucesfull",
       data: result,
     });

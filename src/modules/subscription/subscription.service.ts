@@ -4,6 +4,7 @@ import { stripe } from "../../lib/stripe";
 
 const createsubscription = async (userId: string) => {
   const transction = await prisma.$transaction(async (tx) => {
+
     // find userid
 
     const user = await tx.user.findUniqueOrThrow({
@@ -41,7 +42,7 @@ const createsubscription = async (userId: string) => {
       customer: stripecustomerid,
       payment_method_types: ["card"],
       success_url: `${config.app_url}/premium?success=true`,
-      cancel_url: `${config.app_url}/premium?success=true`,
+      cancel_url: `${config.app_url}/premium?success=false`,
       metadata: { userId: user.id },
     });
 
