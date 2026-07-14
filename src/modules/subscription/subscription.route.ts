@@ -11,4 +11,6 @@ router.post(
   subscriptioncontroller.createsubscription,
 );
 
+router.post("/webhook", subscriptioncontroller.webhooksubscription);
+
 export const subscriptionroute = router;
