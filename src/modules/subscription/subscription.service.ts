@@ -67,25 +67,76 @@ const webhooksubscription = async (payload: Buffer, signature: string) => {
 
   switch (event.type) {
     case "checkout.session.completed":
-      console.log(event.data.object);
       const session: Stripe.Checkout.Session = event.data.object;
-      const userId = session.metadata?.userId;
-      const stripecustomerid = session.customer;
-      const stripesubscriptionId = session.subscription;
+      const userId = session.metadata?.userId as string;
+      const stripecustomerid = session.customer as string;
+      const stripesubscribeId = session.subscription as string;
 
-      if (!userId || !stripecustomerid || stripesubscriptionId) {
+      if (!userId || !stripecustomerid || !stripesubscribeId) {
         throw new Error("webhook failed");
       }
 
-      const stripesubscription = await stripe.subscriptions.retrieve(stripesubscriptionId as string)
+      const stripesubscription = await stripe.subscriptions.retrieve(
+        stripesubscribeId as string,
+      );
+
+      const currentPeriodEndmillesecoend =
+        stripesubscription.items.data[0]?.current_period_end!;
+
+      const currentPeriodEnd = new Date(currentPeriodEndmillesecoend * 1000);
+
+      await prisma.subscription.upsert({
+        where: {
+          userId,
+        },
+        create: {
+          userId,
+          stripecustomerid,
+          stripesubscribeId,
+          status: "ACTIVE",
+          currentPeriodEnd,
+        },
+        update: {
+          stripecustomerid,
+          stripesubscribeId,
+          status: "ACTIVE",
+          currentPeriodEnd,
+        },
+      });
 
       break;
     case "customer.subscription.updated":
-      const paymentupdate = event.data.object;
+      const subscription = event.data.object as Stripe.Subscription;
+
+      const updatePeriodEndmillesecoend =
+        subscription.items.data[0]?.current_period_end!;
+
+      const updatecurrentPeriodEnd = new Date(
+        updatePeriodEndmillesecoend * 1000,
+      );
+
+      await prisma.subscription.update({
+        where: {
+          stripesubscribeId: subscription.id,
+        },
+        data: {
+          status: subscription.status.toUpperCase() as any,
+          updatecurrentPeriodEnd,
+        },
+      });
 
       break;
     case "customer.subscription.deleted":
-      const paymentdelete = event.data.object;
+      const deletesubscription = event.data.object as Stripe.Subscription;
+
+      await prisma.subscription.update({
+        where: {
+          stripesubscribeId: deletesubscription.id,
+        },
+        data: {
+          status: "CENCELED",
+        },
+      });
       break;
     default:
       // Unexpected event type
@@ -93,7 +144,27 @@ const webhooksubscription = async (payload: Buffer, signature: string) => {
   }
 };
 
+const getsubscription = async (userId: string) => {
+  const issubscriptionexist = await prisma.subscription.findUniqueOrThrow({
+    where: {
+      userId,
+    },
+  });
+
+  const isActive =
+    issubscriptionexist.status === "ACTIVE" &&
+    issubscriptionexist.currentPeriodEnd &&
+    new Date(issubscriptionexist.currentPeriodEnd) > new Date();
+
+  return {
+    status: issubscriptionexist.status,
+    isstatus: isActive,
+    currentPeriodEnd: issubscriptionexist.currentPeriodEnd,
+  };
+};
+
 export const subscriptionservice = {
   createsubscription,
   webhooksubscription,
+  getsubscription,
 };

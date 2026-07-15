@@ -10,6 +10,7 @@ import { notfound } from "./middleware/notfound";
 import { globalErrorHandaler } from "./middleware/globalErrorHandaler";
 import { subscriptionroute } from "./modules/subscription/subscription.route";
 import { stripe } from "./lib/stripe";
+import { premiumroute } from "./modules/premium/premium.route";
 
 const app: Application = express();
 
@@ -80,6 +81,7 @@ app.use("/api/auth", authroute);
 app.use("/api/post", postroute);
 app.use("/api/comment", commentroute);
 app.use("/api/subscription", subscriptionroute);
+app.use("/api/premium", premiumroute);
 
 app.use(notfound);
 

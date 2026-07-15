@@ -14,7 +14,6 @@ const createsubscription = catchAsync(
       userId as string,
     );
 
-    
     sendResponce(res, {
       success: true,
       statuscode: httpstatus.CREATED,
@@ -24,14 +23,14 @@ const createsubscription = catchAsync(
   },
 );
 
-// webhook 
+// webhook
 
-const webhooksubscription = catchAsync(async(req:Request,res:Response,next:NextFunction)=>{
+const webhooksubscription = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const payload = req.body;
+    const signature = req.headers["stripe-signature"]!;
 
-    const event = req.body 
-    const signature = req.headers["stripe-signature"]!
-
-    await subscriptionservice.webhooksubscription(event,signature as string)
+    await subscriptionservice.webhooksubscription(payload, signature as string);
 
     sendResponce(res, {
       success: true,
@@ -39,10 +38,28 @@ const webhooksubscription = catchAsync(async(req:Request,res:Response,next:NextF
       massege: "webhook create sucesfull",
       data: null,
     });
+  },
+);
 
-})
+// get status
+
+const getsubscribestatus = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user?.id;
+
+    const result = await subscriptionservice.getsubscription(userId as string);
+
+    sendResponce(res, {
+      success: true,
+      statuscode: httpstatus.OK,
+      massege: "subscription retribe sucesfull",
+      data: result,
+    });
+  },
+);
 
 export const subscriptioncontroller = {
   createsubscription,
   webhooksubscription,
+  getsubscribestatus,
 };
