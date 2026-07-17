@@ -86,7 +86,14 @@ const getallpost = async (query: Ipostquery) => {
     },
   });
 
-  return post;
+  return {
+    post,
+    data: {
+      page: page,
+      limit: limit,
+      skip: skip,
+    },
+  };
 };
 
 // getpost status
