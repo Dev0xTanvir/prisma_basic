@@ -32,7 +32,7 @@ const getallpost = catchAsync(
     sendResponce(res, {
       success: true,
       statuscode: httpstatus.OK,
-      massege: "post create sucesfull",
+      massege: "getall post sucesfull",
       data: post,
     });
   },
@@ -48,7 +48,7 @@ const getpoststatus = catchAsync(
     sendResponce(res, {
       success: true,
       statuscode: httpstatus.OK,
-      massege: "post create sucesfull",
+      massege: "getpost status sucesfull",
       data: result,
     });
   },
@@ -134,7 +134,7 @@ const deletepost = catchAsync(
     sendResponce(res, {
       success: true,
       statuscode: httpstatus.OK,
-      massege: "post update sucesfull",
+      massege: "post delete sucesfull",
       data: null,
     });
   },
