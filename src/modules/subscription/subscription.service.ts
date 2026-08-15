@@ -43,8 +43,8 @@ const createsubscription = async (userId: string) => {
       mode: "subscription",
       customer: stripecustomerid,
       payment_method_types: ["card"],
-      success_url: `${config.app_url}/premium?success=true`,
-      cancel_url: `${config.app_url}/premium?success=false`,
+      success_url: `${config.app_url}/premium/success`,
+      cancel_url: `${config.app_url}/payment`,
       metadata: { userId: user.id },
     });
 
@@ -121,7 +121,7 @@ const webhooksubscription = async (payload: Buffer, signature: string) => {
         },
         data: {
           status: subscription.status.toUpperCase() as any,
-          updatecurrentPeriodEnd,
+          currentPeriodEnd: updatecurrentPeriodEnd,
         },
       });
 
